@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+  <!-- ============================================================ -->
+  <!--  HR Schema XSD — basado en el diagrama ER del esquema Oracle HR -->
+  <!-- ============================================================ -->
+
+  <!-- ==================== ROOT ELEMENT ========================== -->
+  <xs:element name="hr">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="regions"     type="RegionsType"     minOccurs="0"/>
+        <xs:element name="countries"   type="CountriesType"   minOccurs="0"/>
+        <xs:element name="locations"   type="LocationsType"   minOccurs="0"/>
+        <xs:element name="departments" type="DepartmentsType" minOccurs="0"/>
+        <xs:element name="jobs"        type="JobsType"        minOccurs="0"/>
+        <xs:element name="employees"   type="EmployeesType"   minOccurs="0"/>
+        <xs:element name="job_history" type="JobHistoryType"  minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ==================== SIMPLE TYPES ========================== -->
+
+  <!-- ID numérico positivo -->
+  <xs:simpleType name="PositiveIntType">
+    <xs:restriction base="xs:positiveInteger"/>
+  </xs:simpleType>
+
+  <!-- Salario: decimal positivo con hasta 2 decimales -->
+  <xs:simpleType name="SalaryType">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"/>
+      <xs:totalDigits value="10"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Porcentaje de comisión: 0.00 – 1.00 -->
+  <xs:simpleType name="CommissionType">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0.00"/>
+      <xs:maxInclusive value="1.00"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ID de país: exactamente 2 letras mayúsculas (ISO 3166-1 alpha-2) -->
+  <xs:simpleType name="CountryIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{2}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ID de trabajo: letras mayúsculas, guion bajo, hasta 10 chars -->
+  <xs:simpleType name="JobIdType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="10"/>
+      <xs:pattern value="[A-Z_]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Teléfono: números, puntos, guiones, paréntesis, + -->
+  <xs:simpleType name="PhoneType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="20"/>
+      <xs:pattern value="[\d\.\-\+\(\) ]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Elemento opcional que puede estar vacío (nullable) -->
+  <xs:complexType name="NullableInt">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:anyAttribute namespace="##other" processContents="lax"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <!-- ==================== REGIONS =============================== -->
+
+  <xs:complexType name="RegionsType">
+    <xs:sequence>
+      <xs:element name="region" type="RegionType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RegionType">
+    <xs:sequence>
+      <xs:element name="region_id"   type="PositiveIntType"/>
+      <xs:element name="region_name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ==================== COUNTRIES ============================= -->
+
+  <xs:complexType name="CountriesType">
+    <xs:sequence>
+      <xs:element name="country" type="CountryType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CountryType">
+    <xs:sequence>
+      <xs:element name="country_id"   type="CountryIdType"/>
+      <xs:element name="country_name" type="xs:string"/>
+      <xs:element name="region_id"    type="PositiveIntType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ==================== LOCATIONS ============================= -->
+
+  <xs:complexType name="LocationsType">
+    <xs:sequence>
+      <xs:element name="location" type="LocationType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LocationType">
+    <xs:sequence>
+      <xs:element name="location_id"    type="PositiveIntType"/>
+      <xs:element name="street_address" type="xs:string"       minOccurs="0" nillable="true"/>
+      <xs:element name="postal_code"    type="xs:string"       minOccurs="0" nillable="true"/>
+      <xs:element name="city"           type="xs:string"/>
+      <xs:element name="state_province" type="xs:string"       minOccurs="0" nillable="true"/>
+      <xs:element name="country_id"     type="CountryIdType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ==================== DEPARTMENTS =========================== -->
+
+  <xs:complexType name="DepartmentsType">
+    <xs:sequence>
+      <xs:element name="department" type="DepartmentType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DepartmentType">
+    <xs:sequence>
+      <xs:element name="department_id"   type="PositiveIntType"/>
+      <xs:element name="department_name" type="xs:string"/>
+      <!-- manager_id es nullable (departamento sin manager aún) -->
+      <xs:element name="manager_id"      type="xs:string" minOccurs="0" nillable="true"/>
+      <xs:element name="location_id"     type="PositiveIntType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ==================== JOBS ================================== -->
+
+  <xs:complexType name="JobsType">
+    <xs:sequence>
+      <xs:element name="job" type="JobType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="JobType">
+    <xs:sequence>
+      <xs:element name="job_id"    type="JobIdType"/>
+      <xs:element name="job_title" type="xs:string"/>
+      <xs:element name="min_salary" type="SalaryType" minOccurs="0"/>
+      <xs:element name="max_salary" type="SalaryType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ==================== EMPLOYEES ============================= -->
+
+  <xs:complexType name="EmployeesType">
+    <xs:sequence>
+      <xs:element name="employee" type="EmployeeType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="EmployeeType">
+    <xs:sequence>
+      <xs:element name="employee_id"    type="PositiveIntType"/>
+      <xs:element name="first_name"     type="xs:string"       minOccurs="0"/>
+      <xs:element name="last_name"      type="xs:string"/>
+      <xs:element name="email"          type="xs:string"/>
+      <xs:element name="phone_number"   type="PhoneType"       minOccurs="0"/>
+      <xs:element name="hire_date"      type="xs:date"/>
+      <xs:element name="job_id"         type="JobIdType"/>
+      <xs:element name="salary"         type="SalaryType"      minOccurs="0"/>
+      <!-- commission_pct es nullable: solo aplica a empleados de ventas -->
+      <xs:element name="commission_pct" type="xs:string"       minOccurs="0" nillable="true"/>
+      <!-- manager_id es nullable para el presidente (sin jefe) -->
+      <xs:element name="manager_id"     type="xs:string"       minOccurs="0" nillable="true"/>
+      <xs:element name="department_id"  type="xs:string"       minOccurs="0" nillable="true"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ==================== JOB_HISTORY =========================== -->
+
+  <xs:complexType name="JobHistoryType">
+    <xs:sequence>
+      <xs:element name="job_record" type="JobRecordType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="JobRecordType">
+    <xs:sequence>
+      <xs:element name="employee_id"   type="PositiveIntType"/>
+      <xs:element name="start_date"    type="xs:date"/>
+      <xs:element name="end_date"      type="xs:date"/>
+      <xs:element name="job_id"        type="JobIdType"/>
+      <xs:element name="department_id" type="PositiveIntType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

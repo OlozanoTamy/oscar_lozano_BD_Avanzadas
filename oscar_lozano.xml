@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hr xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="oscar_lozano.xsd">
+
+  <!-- REGIONS -->
+  <regions>
+    <region>
+      <region_id>1</region_id>
+      <region_name>Europe</region_name>
+    </region>
+    <region>
+      <region_id>2</region_id>
+      <region_name>Americas</region_name>
+    </region>
+    <region>
+      <region_id>3</region_id>
+      <region_name>Asia</region_name>
+    </region>
+    <region>
+      <region_id>4</region_id>
+      <region_name>Middle East and Africa</region_name>
+    </region>
+  </regions>
+
+  <!-- COUNTRIES -->
+  <countries>
+    <country>
+      <country_id>US</country_id>
+      <country_name>United States of America</country_name>
+      <region_id>2</region_id>
+    </country>
+    <country>
+      <country_id>UK</country_id>
+      <country_name>United Kingdom</country_name>
+      <region_id>1</region_id>
+    </country>
+    <country>
+      <country_id>DE</country_id>
+      <country_name>Germany</country_name>
+      <region_id>1</region_id>
+    </country>
+    <country>
+      <country_id>CO</country_id>
+      <country_name>Colombia</country_name>
+      <region_id>2</region_id>
+    </country>
+  </countries>
+
+  <!-- LOCATIONS -->
+  <locations>
+    <location>
+      <location_id>1000</location_id>
+      <street_address>1297 Via Cola di Rie</street_address>
+      <postal_code>00989</postal_code>
+      <city>Roma</city>
+      <state_province/>
+      <country_id>DE</country_id>
+    </location>
+    <location>
+      <location_id>1700</location_id>
+      <street_address>2004 Charade Rd</street_address>
+      <postal_code>98199</postal_code>
+      <city>Seattle</city>
+      <state_province>Washington</state_province>
+      <country_id>US</country_id>
+    </location>
+    <location>
+      <location_id>1800</location_id>
+      <street_address>460 Bloor St W</street_address>
+      <postal_code>M6G 1L1</postal_code>
+      <city>Toronto</city>
+      <state_province>Ontario</state_province>
+      <country_id>US</country_id>
+    </location>
+    <location>
+      <location_id>2700</location_id>
+      <street_address>Calle 10 No. 43</street_address>
+      <postal_code>050021</postal_code>
+      <city>Medellin</city>
+      <state_province>Antioquia</state_province>
+      <country_id>CO</country_id>
+    </location>
+  </locations>
+
+  <!-- DEPARTMENTS -->
+  <departments>
+    <department>
+      <department_id>10</department_id>
+      <department_name>Administration</department_name>
+      <manager_id>200</manager_id>
+      <location_id>1700</location_id>
+    </department>
+    <department>
+      <department_id>20</department_id>
+      <department_name>Marketing</department_name>
+      <manager_id>201</manager_id>
+      <location_id>1800</location_id>
+    </department>
+    <department>
+      <department_id>30</department_id>
+      <department_name>Purchasing</department_name>
+      <manager_id>114</manager_id>
+      <location_id>1700</location_id>
+    </department>
+    <department>
+      <department_id>60</department_id>
+      <department_name>IT</department_name>
+      <manager_id>103</manager_id>
+      <location_id>1400</location_id>
+    </department>
+    <department>
+      <department_id>90</department_id>
+      <department_name>Executive</department_name>
+      <manager_id>100</manager_id>
+      <location_id>1700</location_id>
+    </department>
+  </departments>
+
+  <!-- JOBS -->
+  <jobs>
+    <job>
+      <job_id>AD_PRES</job_id>
+      <job_title>President</job_title>
+      <min_salary>20000</min_salary>
+      <max_salary>40000</max_salary>
+    </job>
+    <job>
+      <job_id>AD_VP</job_id>
+      <job_title>Administration Vice President</job_title>
+      <min_salary>15000</min_salary>
+      <max_salary>30000</max_salary>
+    </job>
+    <job>
+      <job_id>AD_ASST</job_id>
+      <job_title>Administration Assistant</job_title>
+      <min_salary>3000</min_salary>
+      <max_salary>6000</max_salary>
+    </job>
+    <job>
+      <job_id>IT_PROG</job_id>
+      <job_title>Programmer</job_title>
+      <min_salary>4000</min_salary>
+      <max_salary>10000</max_salary>
+    </job>
+    <job>
+      <job_id>MK_MAN</job_id>
+      <job_title>Marketing Manager</job_title>
+      <min_salary>9000</min_salary>
+      <max_salary>15000</max_salary>
+    </job>
+  </jobs>
+
+  <!-- EMPLOYEES -->
+  <employees>
+    <employee>
+      <employee_id>100</employee_id>
+      <first_name>Steven</first_name>
+      <last_name>King</last_name>
+      <email>SKING</email>
+      <phone_number>515.123.4567</phone_number>
+      <hire_date>1987-06-17</hire_date>
+      <job_id>AD_PRES</job_id>
+      <salary>24000</salary>
+      <commission_pct/>
+      <manager_id/>
+      <department_id>90</department_id>
+    </employee>
+    <employee>
+      <employee_id>101</employee_id>
+      <first_name>Neena</first_name>
+      <last_name>Kochhar</last_name>
+      <email>NKOCHHAR</email>
+      <phone_number>515.123.4568</phone_number>
+      <hire_date>1989-09-21</hire_date>
+      <job_id>AD_VP</job_id>
+      <salary>17000</salary>
+      <commission_pct/>
+      <manager_id>100</manager_id>
+      <department_id>90</department_id>
+    </employee>
+    <employee>
+      <employee_id>103</employee_id>
+      <first_name>Alexander</first_name>
+      <last_name>Hunold</last_name>
+      <email>AHUNOLD</email>
+      <phone_number>590.423.4567</phone_number>
+      <hire_date>1990-01-03</hire_date>
+      <job_id>IT_PROG</job_id>
+      <salary>9000</salary>
+      <commission_pct/>
+      <manager_id>102</manager_id>
+      <department_id>60</department_id>
+    </employee>
+    <employee>
+      <employee_id>114</employee_id>
+      <first_name>Den</first_name>
+      <last_name>Raphaely</last_name>
+      <email>DRAPHEAL</email>
+      <phone_number>515.127.4561</phone_number>
+      <hire_date>1994-12-07</hire_date>
+      <job_id>MK_MAN</job_id>
+      <salary>11000</salary>
+      <commission_pct/>
+      <manager_id>100</manager_id>
+      <department_id>30</department_id>
+    </employee>
+    <employee>
+      <employee_id>200</employee_id>
+      <first_name>Jennifer</first_name>
+      <last_name>Whalen</last_name>
+      <email>JWHALEN</email>
+      <phone_number>515.123.4444</phone_number>
+      <hire_date>1987-09-17</hire_date>
+      <job_id>AD_ASST</job_id>
+      <salary>4400</salary>
+      <commission_pct/>
+      <manager_id>101</manager_id>
+      <department_id>10</department_id>
+    </employee>
+    <employee>
+      <employee_id>201</employee_id>
+      <first_name>Michael</first_name>
+      <last_name>Hartstein</last_name>
+      <email>MHARTSTE</email>
+      <phone_number>515.123.5555</phone_number>
+      <hire_date>1996-02-17</hire_date>
+      <job_id>MK_MAN</job_id>
+      <salary>13000</salary>
+      <commission_pct/>
+      <manager_id>100</manager_id>
+      <department_id>20</department_id>
+    </employee>
+  </employees>
+
+  <!-- JOB_HISTORY -->
+  <job_history>
+    <job_record>
+      <employee_id>101</employee_id>
+      <start_date>1987-09-21</start_date>
+      <end_date>1993-10-27</end_date>
+      <job_id>AD_ASST</job_id>
+      <department_id>110</department_id>
+    </job_record>
+    <job_record>
+      <employee_id>101</employee_id>
+      <start_date>1993-10-28</start_date>
+      <end_date>1997-03-15</end_date>
+      <job_id>AD_VP</job_id>
+      <department_id>90</department_id>
+    </job_record>
+    <job_record>
+      <employee_id>200</employee_id>
+      <start_date>1987-09-17</start_date>
+      <end_date>1993-06-17</end_date>
+      <job_id>AD_ASST</job_id>
+      <department_id>90</department_id>
+    </job_record>
+  </job_history>
+
+</hr>
